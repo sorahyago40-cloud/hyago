@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Caiman_Panel.LoginPage"
+             Title="Caiman Login"
+             BackgroundColor="#0A0F0A">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20" VerticalOptions="CenterAndExpand">
+
+            <!-- Logo/Título -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="🐊 CAIMAN"
+                       FontSize="36"
+                       FontAttributes="Bold"
+                       TextColor="#1FFF00"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="Control Panel"
+                       FontSize="16"
+                       TextColor="#E0E0E0"
+                       HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+
+            <!-- Container de Login -->
+            <Frame Style="{StaticResource PanelFrameStyle}" Padding="16">
+                <VerticalStackLayout Spacing="15">
+
+                    <!-- Username -->
+                    <Label Text="Username"
+                           FontSize="14"
+                           TextColor="#FFFFFF"
+                           FontAttributes="Bold" />
+                    <Entry x:Name="UsernameEntry"
+                           Placeholder="Enter your username"
+                           Style="{StaticResource StandardEntryStyle}"
+                           Text="{Binding Username}" />
+
+                    <!-- Password -->
+                    <Label Text="Password"
+                           FontSize="14"
+                           TextColor="#FFFFFF"
+                           FontAttributes="Bold" />
+                    <Entry x:Name="PasswordEntry"
+                           Placeholder="Enter your password"
+                           IsPassword="True"
+                           Style="{StaticResource StandardEntryStyle}"
+                           Text="{Binding Password}" />
+
+                    <!-- Login Button -->
+                    <Button Text="🔐 LOGIN"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding LoginCommand}"
+                            Margin="0,10,0,0" />
+
+                    <!-- Remember Me -->
+                    <CheckBox Content="Remember me"
+                              IsChecked="{Binding RememberMe}"
+                              Color="#1FFF00" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="#1FFF00"
+                               Scale="1.5" />
+
+            <!-- Error Message -->
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="#FF6B6B"
+                   FontSize="12"
+                   IsVisible="{Binding ShowError}"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Register Link -->
+            <Label TextDecorations="Underline"
+                   TextColor="#1FFF00"
+                   FontSize="12"
+                   HorizontalTextAlignment="Center">
+                <Label.Text>Don't have an account? Register</Label.Text>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

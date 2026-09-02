@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.Maui.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks Condition="$([msbuild]::GetTargetPlatformIdentifier('$(TargetFrameworks)')) == 'windows'">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+
+		<!-- Display name -->
+		<ApplicationTitle>Caiman Panel</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.caiman.panel</ApplicationId>
+		<ApplicationIdGuid>45a6e13e-0326-4e47-9bb5-7fc8a64e0001</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([msbuild]::GetTargetPlatformIdentifier('$(TargetFrameworks)')) == 'ios'">14.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([msbuild]::GetTargetPlatformIdentifier('$(TargetFrameworks)')) == 'android'">21.0</SupportedOSPlatformVersion>
+
+		<!-- Namespace -->
+		<RootNamespace>Caiman_Panel</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+
+		<!-- Project Settings -->
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+
+		<!-- Icons and Splash -->
+		<MauiIcon Include="Resources/AppIcon/appicon.svg" />
+		<MauiSplashScreen Include="Resources/Splash/splash.svg" Color="#0A0F0A" />
+
+		<!-- App Theme -->
+		<MauiFont Include="Resources/Fonts/*.ttf" />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- MAUI -->
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="CommunityToolkit.Diagnostics" Version="8.2.2" />
+
+		<!-- API Communication -->
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="HttpClientInterceptor" Version="2.0.0" Condition="false" />
+
+		<!-- KeyAuth (Authentication) -->
+		<PackageReference Include="RestSharp" Version="107.3.0" />
+
+		<!-- Security -->
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.8.0" />
+		<PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Base -->
+		<MauiXaml Include="**/*.xaml" />
+		<MauiAsset Include="Resources/**" />
+		<None Remove="Resources\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Windows Specific -->
+		<PackageReference Condition="$([msbuild]::GetTargetPlatformIdentifier('$(TargetFrameworks)')) == 'windows'" Include="Microsoft.WindowsAppSDK" Version="1.4.231219000" />
+	</ItemGroup>
+
+</Project>

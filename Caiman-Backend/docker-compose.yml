@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: caiman-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: caiman
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - caiman-network
+
+  backend:
+    build: .
+    container_name: caiman-backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      MONGODB_URI: mongodb://admin:admin@mongodb:27017/caiman
+      JWT_SECRET: caiman-secret-key-change-in-production
+      PORT: 3000
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+    networks:
+      - caiman-network
+
+volumes:
+  mongodb_data:
+  mongodb_config:
+
+networks:
+  caiman-network:
+    driver: bridge

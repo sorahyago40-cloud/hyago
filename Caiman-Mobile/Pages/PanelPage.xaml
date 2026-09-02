@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Caiman_Panel.PanelPage"
+             Title="Caiman Panel"
+             BackgroundColor="#0A0F0A">
+
+    <VerticalStackLayout Padding="16" Spacing="16">
+
+        <!-- Header -->
+        <Frame Style="{StaticResource PanelFrameStyle}">
+            <VerticalStackLayout Spacing="8">
+                <Label Text="🐊 CAIMAN PAINEL"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#1FFF00" />
+                <Label Text="{Binding CurrentUser, StringFormat='Usuario: {0}'}"
+                       FontSize="12"
+                       TextColor="#E0E0E0" />
+                <Label Text="{Binding LastLoginTime, StringFormat='Ultimo login: {0:HH:mm}'}"
+                       FontSize="10"
+                       TextColor="#A0A0A0" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Status da Sessão -->
+        <Frame Style="{StaticResource PanelFrameStyle}">
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Spacing="8">
+                <Label Text="Status" FontSize="12" FontAttributes="Bold" TextColor="#FFFFFF" />
+                <Label Grid.Column="1" Text="{Binding SessionStatus}" TextColor="#1FFF00" FontAttributes="Bold" HorizontalTextAlignment="End" />
+
+                <Label Grid.Row="1" Text="Conexão" FontSize="12" TextColor="#E0E0E0" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding ConnectionStatus}" TextColor="#1FFF00" HorizontalTextAlignment="End" />
+            </Grid>
+        </Frame>
+
+        <!-- Funcionalidades -->
+        <Label Text="FUNCIONALIDADES" FontSize="14" FontAttributes="Bold" TextColor="#1FFF00" />
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="12">
+                <!-- Aimbot -->
+                <Frame Style="{StaticResource PanelFrameStyle}">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Aimbot" FontSize="14" FontAttributes="Bold" TextColor="#FFFFFF" />
+                            <Switch Grid.Column="1" IsToggled="{Binding AimbotEnabled}" OnColor="#1FFF00" />
+                        </Grid>
+                        <Label Text="Mira automática com delay configurável" FontSize="11" TextColor="#E0E0E0" />
+
+                        <!-- Delay Slider -->
+                        <Label Text="{Binding AimbotDelay, StringFormat='Delay: {0}ms'}" FontSize="11" TextColor="#A0A0A0" />
+                        <Slider Minimum="50" Maximum="500" Value="{Binding AimbotDelay}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Rapidfire -->
+                <Frame Style="{StaticResource PanelFrameStyle}">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout>
+                            <Label Text="RapidFire" FontSize="14" FontAttributes="Bold" TextColor="#FFFFFF" />
+                            <Label Text="Cadência de tiro aumentada" FontSize="11" TextColor="#E0E0E0" />
+                        </VerticalStackLayout>
+                        <Switch Grid.Column="1" IsToggled="{Binding RapidFireEnabled}" OnColor="#1FFF00" VerticalOptions="Start" />
+                    </Grid>
+                </Frame>
+
+                <!-- Wallhack -->
+                <Frame Style="{StaticResource PanelFrameStyle}">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout>
+                            <Label Text="Wallhack" FontSize="14" FontAttributes="Bold" TextColor="#FFFFFF" />
+                            <Label Text="Ver através de paredes" FontSize="11" TextColor="#E0E0E0" />
+                        </VerticalStackLayout>
+                        <Switch Grid.Column="1" IsToggled="{Binding WallhackEnabled}" OnColor="#1FFF00" VerticalOptions="Start" />
+                    </Grid>
+                </Frame>
+
+                <!-- ESP -->
+                <Frame Style="{StaticResource PanelFrameStyle}">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="ESP (Player Detection)" FontSize="14" FontAttributes="Bold" TextColor="#FFFFFF" />
+                            <Switch Grid.Column="1" IsToggled="{Binding ESPEnabled}" OnColor="#1FFF00" />
+                        </Grid>
+                        <Label Text="Detectar e rastrear jogadores" FontSize="11" TextColor="#E0E0E0" />
+
+                        <Label Text="Distância máxima:" FontSize="11" TextColor="#A0A0A0" />
+                        <Slider Minimum="10" Maximum="500" Value="{Binding ESPDistance}" />
+                        <Label Text="{Binding ESPDistance, StringFormat='{0} metros'}" FontSize="10" TextColor="#1FFF00" />
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Botões de Ação -->
+        <VerticalStackLayout Spacing="10">
+            <Button Text="⚙️ APLICAR CONFIGURAÇÕES"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Command="{Binding ApplySettingsCommand}" />
+
+            <Button Text="🔄 REINICIAR"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    Command="{Binding RestartCommand}" />
+
+            <Button Text="🚪 DESCONECTAR"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    Command="{Binding LogoutCommand}" />
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+
+</ContentPage>
