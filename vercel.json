@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd Caiman-Web && npm install && npm run build",
+  "outputDirectory": "Caiman-Web/dist",
+  "framework": "other"
+}
