@@ -8,9 +8,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const distPath = path.resolve(__dirname, 'dist');
 
-console.log(`📁 Serving files from: ${distPath}`);
-console.log(`📋 Files in dist:`, fs.readdirSync(distPath));
-
 // CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -20,32 +17,50 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files with correct MIME types
-app.use((req, res, next) => {
-  if (req.path.startsWith('/assets/')) {
-    if (req.path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-    } else if (req.path.endsWith('.css')) {
-      res.setHeader('Content-Type', 'text/css; charset=utf-8');
-    } else if (req.path.endsWith('.json')) {
-      res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    }
-  }
-  next();
+// Serve files manually with correct MIME types
+app.get('*.js', (req, res) => {
+  const filePath = path.join(distPath, req.path);
+  res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  res.sendFile(filePath);
 });
 
-app.use(express.static(distPath));
+app.get('*.css', (req, res) => {
+  const filePath = path.join(distPath, req.path);
+  res.setHeader('Content-Type', 'text/css; charset=utf-8');
+  res.sendFile(filePath);
+});
 
-// SPA fallback
+app.get('*.json', (req, res) => {
+  const filePath = path.join(distPath, req.path);
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.sendFile(filePath);
+});
+
+app.get('*.svg', (req, res) => {
+  const filePath = path.join(distPath, req.path);
+  res.setHeader('Content-Type', 'image/svg+xml');
+  res.sendFile(filePath);
+});
+
+app.get('*.png', (req, res) => {
+  const filePath = path.join(distPath, req.path);
+  res.setHeader('Content-Type', 'image/png');
+  res.sendFile(filePath);
+});
+
+app.get('*.ico', (req, res) => {
+  const filePath = path.join(distPath, req.path);
+  res.setHeader('Content-Type', 'image/x-icon');
+  res.sendFile(filePath);
+});
+
+// Fallback to index.html for SPA
 app.use((req, res) => {
   const indexPath = path.join(distPath, 'index.html');
-  if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath);
-  } else {
-    res.status(404).send('index.html not found');
-  }
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.sendFile(indexPath);
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server on port ${PORT}`);
 });
