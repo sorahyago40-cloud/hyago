@@ -11,9 +11,9 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const distPath = path.join(__dirname, 'dist');
+const distPath = path.resolve(__dirname, 'dist');
 const JWT_SECRET = process.env.JWT_SECRET || 'caiman-secret-key-change-in-production';
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = path.resolve(__dirname, 'data');
 
 // Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {
@@ -189,16 +189,30 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, status: 'ok' });
 });
 
-// Serve static files
+// Serve static assets with correct MIME types
 app.use(express.static(distPath, {
   maxAge: '1y',
-  etag: false
+  etag: false,
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    } else if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css; charset=utf-8');
+    } else if (path.endsWith('.json')) {
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    }
+  }
 }));
 
 // SPA fallback - serve index.html for all other routes
 app.use((req, res) => {
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.sendFile(path.join(distPath, 'index.html'));
+  const indexPath = path.join(distPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).send('Not Found');
+  }
 });
 
 app.listen(PORT, () => {
