@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "buildCommand": "cd Caiman-Web && npm install && npm run build",
+  "outputDirectory": "Caiman-Web",
+  "framework": "nodejs",
+  "serverlessFunctionRegion": "iad1"
+}
