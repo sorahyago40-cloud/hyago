@@ -242,7 +242,7 @@ export default function PanelPage({ token, user }) {
 
       <div className="panel-info">
         <p>💡 Dica: Ajuste os valores e clique em "Aplicar Configurações"</p>
-        <p>👤 Usuário: <strong>{user}</strong></p>
+        <p>👤 Usuário: <strong>{user?.username || user}</strong></p>
         <p>🔌 Status: <strong>{status === 'connected' ? 'Conectado' : 'Desconectado'}</strong></p>
       </div>
     </div>
