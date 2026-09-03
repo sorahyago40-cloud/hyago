@@ -1,0 +1,89 @@
+════════════════════════════════════════════════════════════════
+   🟢 CAIMAN PANEL - ACESSE AGORA 🟢
+════════════════════════════════════════════════════════════════
+
+📱 LINK PARA ACESSAR:
+   https://sorahyago40-cloud.github.io/hyago
+
+👤 CREDENCIAIS:
+   Usuário: admin
+   Senha:   admin123
+
+════════════════════════════════════════════════════════════════
+
+🚀 COMO USAR NO CELULAR (iOS/Android):
+
+1. ABRA o link acima no NAVEGADOR do seu celular
+2. TOQUE no botão de MENU (⋮ ou compartilhar)
+3. SELECIONE "Adicionar à tela inicial" ou "Install app"
+4. PRONTO! Um ícone aparecerá na tela inicial
+
+════════════════════════════════════════════════════════════════
+
+✨ RECURSOS DISPONÍVEIS:
+
+✅ Aimbot         - Com controle de delay
+✅ RapidFire      - Disparo rápido
+✅ Wallhack       - Ver através de paredes
+✅ ESP            - Com distância configurável
+✅ Controles      - Update, Stats, Save, Reset, Backup, Info
+✅ Status         - Conexão em tempo real
+✅ Autenticação   - Login seguro com JWT
+
+════════════════════════════════════════════════════════════════
+
+💡 DICAS:
+
+- A app funciona OFFLINE (Service Worker)
+- Sincroniza quando internet volta
+- Funciona 100% em Android e iOS
+- SEM jailbreak necessário
+- Seguro com criptografia bcrypt
+
+════════════════════════════════════════════════════════════════
+
+🔒 SEGURANÇA:
+
+- Senhas com bcrypt (não reversíveis)
+- JWT com assinatura segura
+- Tokens expiram após 7 dias
+- CORS configurado
+- Sem dados sensíveis em localStorage
+
+════════════════════════════════════════════════════════════════
+
+❓ PERGUNTAS:
+
+P: Funciona no iOS?
+R: SIM! 100% sem jailbreak. É PWA (Progressive Web App).
+
+P: E se cair a internet?
+R: Continua funcionando offline. Sincroniza quando volta.
+
+P: Preciso pagar?
+R: NÃO! Tudo é grátis (GitHub Pages + Open Source).
+
+P: Funciona no Android?
+R: SIM! Chrome, Firefox, Samsung Internet, tudo funciona.
+
+════════════════════════════════════════════════════════════════
+
+📲 INSTALAR COMO APP (Recomendado):
+
+iOS:
+  1. Toque o compartilhar (↗️)
+  2. "Adicionar à Tela Inicial"
+  3. Pronto!
+
+Android:
+  1. Toque o menu (⋮)
+  2. "Instalar app" ou "Install"
+  3. Pronto!
+
+════════════════════════════════════════════════════════════════
+
+✅ TUDO ESTÁ PRONTO - NENHUMA CONFIGURAÇÃO MANUAL NECESSÁRIA!
+
+Basta copiar o link e compartilhar com seus amigos.
+
+════════════════════════════════════════════════════════════════
