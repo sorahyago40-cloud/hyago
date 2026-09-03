@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - claude/connect-github-repo-qqmnta
+    paths:
+      - 'Caiman-Web/**'
+      - '.github/workflows/deploy-github-pages.yml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'Caiman-Web/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: ./Caiman-Web
+        run: npm ci
+
+      - name: Build
+        working-directory: ./Caiman-Web
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './Caiman-Web/dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+      - name: Comment on PR
+        if: github.event_name == 'push'
+        run: |
+          echo "✅ Deploy completed!"
+          echo "🌐 Site: https://sorahyago40-cloud.github.io/hyago"
