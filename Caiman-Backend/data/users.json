@@ -1,0 +1,12 @@
+{
+  "admin": {
+    "username": "admin",
+    "password": "$2a$10$4TAFdK/VG8pfjtUC6ujoqO.S2jTTyHkRzTQQWXCUYMeHK/cSOLPOm",
+    "email": "admin@caiman.panel",
+    "status": "active",
+    "licenseKey": "default",
+    "createdAt": "2026-09-03T00:12:17.748Z",
+    "updatedAt": "2026-09-03T00:12:17.843Z",
+    "lastLogin": "2026-09-03T00:12:17.843Z"
+  }
+}

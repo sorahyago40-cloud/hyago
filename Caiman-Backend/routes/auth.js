@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
+const mockUsers = require('../models/mockUsers');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'caiman-secret-key-change-in-production';
 
@@ -19,21 +20,46 @@ router.post('/login', [
         }
 
         const { username, password } = req.body;
+        let user;
+        let useMock = false;
 
-        // Find user
-        let user = await User.findOne({ username });
-        if (!user) {
-            // Create demo user for testing
-            if (username === 'admin' && password === 'admin123') {
-                user = new User({
-                    username: 'admin',
-                    password: await bcrypt.hash('admin123', 10),
-                    email: 'admin@caiman.panel',
-                    status: 'active'
-                });
-                await user.save();
-            } else {
-                return res.status(401).json({ success: false, message: 'Credenciais inválidas' });
+        try {
+            // Try to find user in MongoDB
+            user = await User.findOne({ username }).timeout(2000);
+
+            if (!user) {
+                // Create demo user for testing
+                if (username === 'admin' && password === 'admin123') {
+                    user = new User({
+                        username: 'admin',
+                        password: await bcrypt.hash('admin123', 10),
+                        email: 'admin@caiman.panel',
+                        status: 'active'
+                    });
+                    await user.save();
+                } else {
+                    return res.status(401).json({ success: false, message: 'Credenciais inválidas' });
+                }
+            }
+        } catch (dbError) {
+            // Fall back to mock data if MongoDB is unavailable
+            console.log('⚠️  MongoDB unavailable, using mock data');
+            useMock = true;
+
+            user = mockUsers.findUserByUsername(username);
+            if (!user) {
+                // Create demo user for testing
+                if (username === 'admin' && password === 'admin123') {
+                    user = await mockUsers.createUser({
+                        username: 'admin',
+                        password: 'admin123',
+                        email: 'admin@caiman.panel',
+                        status: 'active',
+                        licenseKey: 'default'
+                    });
+                } else {
+                    return res.status(401).json({ success: false, message: 'Credenciais inválidas' });
+                }
             }
         }
 
@@ -45,14 +71,18 @@ router.post('/login', [
 
         // Generate token
         const token = jwt.sign(
-            { userId: user._id, username: user.username },
+            { userId: user._id || user.username, username: user.username },
             JWT_SECRET,
             { expiresIn: '7d' }
         );
 
         // Update last login
-        user.lastLogin = new Date();
-        await user.save();
+        if (!useMock) {
+            user.lastLogin = new Date();
+            await user.save();
+        } else {
+            mockUsers.updateUserLastLogin(username);
+        }
 
         res.json({
             success: true,
@@ -60,7 +90,7 @@ router.post('/login', [
             token,
             expiresIn: 604800, // 7 dias em segundos
             user: {
-                id: user._id,
+                id: user._id || user.username,
                 username: user.username,
                 email: user.email
             }
@@ -83,36 +113,66 @@ router.post('/register', [
         }
 
         const { username, password, email, licenseKey } = req.body;
+        let useMock = false;
 
-        // Check if user exists
-        let user = await User.findOne({ username });
-        if (user) {
-            return res.status(400).json({ success: false, message: 'Usuário já existe' });
-        }
-
-        // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create user
-        user = new User({
-            username,
-            password: hashedPassword,
-            email,
-            licenseKey: licenseKey || 'trial',
-            status: 'active'
-        });
-
-        await user.save();
-
-        res.status(201).json({
-            success: true,
-            message: 'Registro bem-sucedido',
-            user: {
-                id: user._id,
-                username: user.username,
-                email: user.email
+        try {
+            // Check if user exists in MongoDB
+            let user = await User.findOne({ username }).timeout(2000);
+            if (user) {
+                return res.status(400).json({ success: false, message: 'Usuário já existe' });
             }
-        });
+
+            // Hash password
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            // Create user
+            user = new User({
+                username,
+                password: hashedPassword,
+                email,
+                licenseKey: licenseKey || 'trial',
+                status: 'active'
+            });
+
+            await user.save();
+
+            res.status(201).json({
+                success: true,
+                message: 'Registro bem-sucedido',
+                user: {
+                    id: user._id,
+                    username: user.username,
+                    email: user.email
+                }
+            });
+        } catch (dbError) {
+            // Fall back to mock data if MongoDB is unavailable
+            console.log('⚠️  MongoDB unavailable, using mock data');
+            useMock = true;
+
+            const existingUser = mockUsers.findUserByUsername(username);
+            if (existingUser) {
+                return res.status(400).json({ success: false, message: 'Usuário já existe' });
+            }
+
+            const newUser = await mockUsers.createUser({
+                username,
+                password,
+                email,
+                status: 'active',
+                licenseKey: licenseKey || 'trial'
+            });
+
+            res.status(201).json({
+                success: true,
+                message: 'Registro bem-sucedido',
+                user: {
+                    id: newUser.username,
+                    username: newUser.username,
+                    email: newUser.email
+                }
+            });
+        }
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
