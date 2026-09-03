@@ -2,24 +2,35 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="CAIMAN Panel - Mobile Web App">
-    <meta name="theme-color" content="#1FFF00">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="CAIMAN">
-    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAIMAN Panel</title>
-</head>
-<body style="margin:0;padding:0;background:#0a0a0a;color:#1FFF00;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;">
-    <div id="root" style="text-align:center;">
-        <p>🟢 Carregando...</p>
-    </div>
-    <script type="module" src="/src/main.jsx"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(() => {});
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #1FFF00;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
+        #root { width: 100%; }
+        .debug { text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="debug">
+            <p>🟢 Iniciando CAIMAN Panel...</p>
+        </div>
+    </div>
+    <script>
+        console.log('HTML carregado');
+        window.addEventListener('error', (e) => {
+            console.error('ERRO GLOBAL:', e);
+        });
     </script>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
