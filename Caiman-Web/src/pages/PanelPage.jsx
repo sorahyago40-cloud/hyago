@@ -209,8 +209,41 @@ export default function PanelPage({ token, user }) {
         </button>
       </div>
 
+      <div className="panel-controls">
+        <h2 className="section-title">⚙️ Controles do Sistema</h2>
+
+        <div className="control-group">
+          <button className="btn-control btn-update">
+            📦 Atualizar Sistema
+          </button>
+          <button className="btn-control btn-stats">
+            📊 Ver Estatísticas
+          </button>
+        </div>
+
+        <div className="control-group">
+          <button className="btn-control btn-save">
+            💾 Salvar Configurações
+          </button>
+          <button className="btn-control btn-reset">
+            🔄 Resetar para Padrão
+          </button>
+        </div>
+
+        <div className="control-group">
+          <button className="btn-control btn-backup">
+            🔐 Fazer Backup
+          </button>
+          <button className="btn-control btn-info">
+            ℹ️ Informações do Sistema
+          </button>
+        </div>
+      </div>
+
       <div className="panel-info">
         <p>💡 Dica: Ajuste os valores e clique em "Aplicar Configurações"</p>
+        <p>👤 Usuário: <strong>{user}</strong></p>
+        <p>🔌 Status: <strong>{status === 'connected' ? 'Conectado' : 'Desconectado'}</strong></p>
       </div>
     </div>
   )

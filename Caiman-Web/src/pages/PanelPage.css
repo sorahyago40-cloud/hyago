@@ -282,6 +282,97 @@ input[type="range"]::-moz-range-thumb:active {
   margin: 0;
 }
 
+.panel-controls {
+  background-color: var(--secondary-bg);
+  border: 2px solid var(--primary-green);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+.control-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.btn-control {
+  padding: 12px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 2px solid var(--primary-green);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--panel-bg);
+  color: var(--text-primary);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-control:hover:not(:disabled) {
+  background-color: var(--primary-green);
+  color: var(--dark-bg);
+  box-shadow: 0 0 15px rgba(31, 255, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-control:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-update {
+  grid-column: 1;
+}
+
+.btn-stats {
+  grid-column: 2;
+}
+
+.btn-save {
+  grid-column: 1;
+}
+
+.btn-reset {
+  grid-column: 2;
+}
+
+.btn-backup {
+  grid-column: 1;
+}
+
+.btn-info {
+  grid-column: 2;
+}
+
+.panel-info {
+  background-color: rgba(31, 255, 0, 0.05);
+  border: 1px solid rgba(31, 255, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.panel-info p {
+  margin: 4px 0;
+}
+
+.panel-info strong {
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
 @media (max-width: 480px) {
   .panel-page {
     padding: 8px;
@@ -308,5 +399,38 @@ input[type="range"]::-moz-range-thumb:active {
 
   .toggle-switch.active::after {
     left: 22px;
+  }
+
+  .control-group {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-control {
+    grid-column: 1 !important;
+    width: 100%;
+  }
+
+  .btn-update {
+    grid-column: 1 !important;
+  }
+
+  .btn-stats {
+    grid-column: 1 !important;
+  }
+
+  .btn-save {
+    grid-column: 1 !important;
+  }
+
+  .btn-reset {
+    grid-column: 1 !important;
+  }
+
+  .btn-backup {
+    grid-column: 1 !important;
+  }
+
+  .btn-info {
+    grid-column: 1 !important;
   }
 }
