@@ -1,0 +1,224 @@
+.settings-page {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.settings-section {
+  background-color: var(--secondary-bg);
+  border: 2px solid var(--panel-bg);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 12px 0;
+}
+
+.settings-section:hover {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 15px rgba(31, 255, 0, 0.1);
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(31, 255, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.setting-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--panel-bg);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.setting-value {
+  font-size: 1rem;
+  color: var(--primary-green);
+  margin: 6px 0 0 0;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.setting-hint {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 6px 0 0 0;
+}
+
+.stat-item {
+  margin-bottom: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--panel-bg);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.stat-item label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.stat-bar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--panel-bg);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.stat-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  background: linear-gradient(90deg, var(--primary-green), var(--bright-green));
+  box-shadow: 0 0 10px rgba(31, 255, 0, 0.3);
+}
+
+.stat-fill.cpu {
+  background: linear-gradient(90deg, #00BFFF, #1FFF00);
+}
+
+.stat-fill.memory {
+  background: linear-gradient(90deg, var(--primary-green), var(--bright-green));
+}
+
+.stat-value {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--primary-green);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.stat-loading {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+.btn-setting {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  background-color: var(--panel-bg);
+  color: var(--text-primary);
+  border: 2px solid var(--primary-green);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-setting:hover {
+  background-color: rgba(31, 255, 0, 0.1);
+  border-color: var(--bright-green);
+  box-shadow: 0 0 15px rgba(31, 255, 0, 0.2);
+}
+
+.btn-setting:active {
+  transform: scale(0.98);
+}
+
+.settings-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn-logout {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: rgba(255, 107, 107, 0.2);
+  color: #FF6B6B;
+  border: 2px solid #FF6B6B;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover:not(:disabled) {
+  background-color: rgba(255, 107, 107, 0.3);
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-logout:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.settings-footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--panel-bg);
+}
+
+.settings-footer p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin: 5px 0;
+}
+
+.settings-footer p:first-child {
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .settings-page {
+    padding: 8px;
+  }
+
+  .settings-section {
+    padding: 12px;
+    margin: 10px 0;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .btn-setting {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}

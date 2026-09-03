@@ -1,0 +1,146 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+.app-header {
+  background-color: var(--secondary-bg);
+  border-bottom: 2px solid var(--primary-green);
+  padding: 15px 20px;
+  box-shadow: 0 0 20px rgba(31, 255, 0, 0.2);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-green), var(--bright-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(31, 255, 0, 0.3);
+  letter-spacing: 2px;
+}
+
+.user-info {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.user-info span {
+  display: block;
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+.app-main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 60px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-main::-webkit-scrollbar {
+  width: 4px;
+}
+
+.app-main::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.app-main::-webkit-scrollbar-thumb {
+  background-color: var(--panel-bg);
+  border-radius: 2px;
+}
+
+.app-main::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-green);
+}
+
+.app-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background-color: var(--secondary-bg);
+  border-top: 2px solid var(--primary-green);
+  box-shadow: 0 -5px 20px rgba(31, 255, 0, 0.1);
+  z-index: 200;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-btn {
+  flex: 1;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: none;
+  padding: 12px 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+.nav-btn.active {
+  color: var(--primary-green);
+  background: linear-gradient(180deg, rgba(31, 255, 0, 0.1) 0%, transparent 100%);
+  border-top: 3px solid var(--primary-green);
+  box-shadow: 0 -10px 30px rgba(31, 255, 0, 0.2);
+}
+
+/* Scrollbar optimization for mobile */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 8px;
+    padding-bottom: 65px;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .nav-btn {
+    font-size: 0.85rem;
+    padding: 10px 0;
+  }
+}
+
+/* Safe area for notch */
+@supports (padding: max(0px)) {
+  .app-header {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+
+  .app-nav {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
