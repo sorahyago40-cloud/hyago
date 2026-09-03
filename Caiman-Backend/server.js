@@ -11,13 +11,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Database Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/caiman', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('✅ Database connected'))
-.catch(err => console.error('❌ Database error:', err));
+// Database Connection (Optional for demo)
+try {
+    mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/caiman', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('✅ Database connected'))
+    .catch(err => console.warn('⚠️  Database not available - using mock data'));
+} catch (err) {
+    console.warn('⚠️  MongoDB not available - using mock data');
+}
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
