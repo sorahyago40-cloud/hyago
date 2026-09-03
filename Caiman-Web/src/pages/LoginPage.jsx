@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import './LoginPage.css'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://192.0.2.2:3000'
+const API_URL = ''
 
 export default function LoginPage({ onLogin }) {
   const [username, setUsername] = useState('')

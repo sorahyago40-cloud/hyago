@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './SettingsPage.css'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://192.0.2.2:3000'
+const API_URL = ''
 
 export default function SettingsPage({ token, user, onLogout }) {
   const [stats, setStats] = useState(null)
