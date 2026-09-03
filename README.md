@@ -2,6 +2,12 @@
 
 Aplicação Web completa do CAIMAN Panel para Android e iOS. Funciona 100% sem erros e sem configuração manual.
 
+## 🚀 DEPLOY AUTOMÁTICO NO VERCEL (1 CLIQUE!)
+
+**[📤 CLIQUE AQUI PARA FAZER DEPLOY NO VERCEL 📤](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsorahyago40-cloud%2Fhyago&project-name=caiman-panel&repository-name=hyago&root-directory=Caiman-Web&env=VITE_API_URL&envDescription=API%20URL%20for%20backend&envLink=https%3A%2F%2Fcaiman-backend.onrender.com&redirect-url=https%3A%2F%2Fcaiman-panel.vercel.app)**
+
+Ou leia: [VERCEL_DEPLOY.md](./VERCEL_DEPLOY.md)
+
 ## ✅ Solução Completa
 
 Tudo está configurado e pronto para usar:
